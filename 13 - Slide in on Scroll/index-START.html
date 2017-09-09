@@ -43,6 +43,7 @@
   </div>
 
   <script>
+  // debounce makes EventListener 'scroll' wait a set millisecond amount before running encapsulated function, eg checkSlide, thus incresing website performance
     function debounce(func, wait = 20, immediate = true) {
       var timeout;
       return function() {
@@ -57,6 +58,31 @@
         if (callNow) func.apply(context, args);
       };
     }
+
+    const sliderImages = document.querySelectorAll('.slide-in')
+
+    function checkSlide(event) {
+      // console.log(event)
+      // console.count(event)
+      sliderImages.forEach(sliderImage => {
+        // half way through the image
+        const slideInAt = (window.scrollY + window.innerHeight) - sliderImage.height / 2
+        // bottom of the image
+        const imageBottom = sliderImage.offsetTop + sliderImage.height
+        // is the image half shown
+        const isHalfShown = slideInAt > sliderImage.offsetTop
+        // have you scrolled past the image
+        const isNotScrolledPast = window.scrollY < imageBottom
+
+        if (isHalfShown && isNotScrolledPast) {
+          sliderImage.classList.add('active')
+        } else {
+          sliderImage.classList.remove('active')
+        }
+      })
+    }
+
+    window.addEventListener('scroll', debounce(checkSlide))
 
   </script>
 
