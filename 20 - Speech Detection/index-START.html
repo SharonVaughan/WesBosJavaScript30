@@ -12,6 +12,44 @@
 <script>
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
+  const recognition = new SpeechRecognition();
+  recognition.interimResults = true;
+
+  let p = document.createElement('p');
+  const words = document.querySelector('.words');
+  words.appendChild(p)
+
+  recognition.addEventListener('result', event => {
+    // console.log(event.results)
+    const transcript = Array.from(event.results)
+      .map(result => result[0])
+      .map(result => result.transcript)
+      .join('')
+
+    p.textContent = transcript
+    if (event.results[0].isFinal) {
+      p = document.createElement('p')
+      words.appendChild(p)
+    }
+
+    // Would need de-bouncing so it only runs once
+    if (transcript.includes('unicorn')) {
+      console.log('🦄 🦄 🦄 🦄 🦄 🦄 🦄 🦄 🦄 🦄')
+    }
+
+    // Would need de-bouncing so it only runs once
+    // Hook up to external weather api or other api so calls to functions for a hands-off application
+    if (transcript.includes('get the weather')) {
+      console.log('I am getting the weather')
+    }
+
+    console.log(transcript)
+  })
+
+  recognition.addEventListener('end', recognition.start)
+
+  recognition.start()
+
 
 </script>
 
