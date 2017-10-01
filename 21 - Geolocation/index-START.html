@@ -58,6 +58,43 @@
     /*Compass: https://thenounproject.com/search/?q=compass&i=592352*/
   </style>
   <script>
+    const arrow = document.querySelector('.arrow')
+    const speed = document.querySelector('.speed-value')
+
+    // getCurrentPosition is the other one
+    navigator.geolocation.watchPosition((data) => {
+      // console.log(data)
+      speed.textContent = data.coords.speed
+      arrow.style.transform = `rotate(${data.coords.heading}deg)`
+    }, (ifError) => {
+      console.err(err)
+      alert('HEY! That has to happen for this to work!')
+    }) 
+
+
   </script>
 </body>
 </html>
+
+ To get this to work:
+  * download xCode (iOS Simulator)
+    - Open Developer Tool
+    - Simulator (Debug > Location for different types of data; Hardware > Device for different types of phones)
+  * on terminal:
+    - npm install
+    - npm start
+    - copy External: address (from https to end)
+  * in Chrome:
+    - choose "Advanced" when it opens "Your connection is not private"
+    - choose "Proceed to localhost (unsafe)"
+  * in Simulator
+    - open Safari
+    - paste the https address
+    - click on "Continue" for "Cannot Verify"
+    - choose Finished (or Start)
+    - choose Allow
+    - choose OK
+  * in Safari
+    - choose Safari > Perferences, click Advanced, then select "Show Develop menu in menu bar"
+    - choose Develop > Simulator > Console for debugging
+  
