@@ -27,6 +27,41 @@
 
   <script>
     // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+
+    const triggers = document.querySelectorAll('a')
+    const highlight = document.createElement('span')
+    // console.log(highlight)
+    highlight.classList.add('highlight')
+    // highlight.classList.add('sneeze')
+    // console.log(highlight.classList)
+    document.body.append(highlight)
+
+    function highlightLink() {
+      // console.log('highlight!!')
+      // console.log(this)
+      // getBoundingClientRect JavaScript method
+      const linkCoords = this.getBoundingClientRect()
+      // console.log(linkCoords)
+      const coords = {
+        width: linkCoords.width,
+        height: linkCoords.height,
+        top: linkCoords.top + window.scrollY,
+        left: linkCoords.left + window.scrollX
+      }
+      // highlight.style.width = `${linkCoords.width}px`
+      // highlight.style.height = `${linkCoords.height}px`
+      // // highlight transition style animates smooth resizing
+      // highlight.style.transform = `translate(${linkCoords.left}px, ${linkCoords.top}px)`
+
+      highlight.style.width = `${coords.width}px`
+      highlight.style.height = `${coords.height}px`
+      // highlight transition style animates smooth resizing
+      highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`
+
+    }
+
+    triggers.forEach(a => a.addEventListener('mouseenter', highlightLink))
+
   </script>
 </body>
 </html>
