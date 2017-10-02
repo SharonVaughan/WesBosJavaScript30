@@ -40,6 +40,44 @@
 <button></button>
 <script>
 
+// capture goes top down, where you clicked and storing them
+// bubble goes bottom up, tiggering events as you go up to parent elements
+
+  const divs = document.querySelectorAll('div')
+  const button = document.querySelector('button')
+
+  function logText(event) {
+    // event.stopPropagation() // stop bubbling! (and capture) just the clicked element is recorded
+    console.log(this.classList.value)
+    // console.log(this)
+  }
+
+  // document.body.addEventListener('click', logText)
+
+// capture: true console.logs them in logText from outer most down
+// until the clicked element is reached
+// by default capture: false and doesn't need referencing
+// if capture: true && stopPropagation the outer most element will be recorded
+
+  // divs.forEach(div => div.addEventListener('click', logText, {
+  //   capture: true
+  // }))
+
+// once unbinds the addEventListener
+// no more click events will happen after the first time
+  divs.forEach(div => div.addEventListener('click', logText, {
+    once: true
+  }))
+
+  // divs.forEach(div => div.addEventListener('click', logText))
+
+// once use eg store checkouts where you don't want someone to click a button only once
+  button.addEventListener('click', () => {
+    console.log('Click!!!!')
+  }, {
+    once: true
+  })
+
 </script>
 </body>
 </html>
