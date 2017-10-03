@@ -35,7 +35,50 @@
   </div>
 
 <script>
+
+  const slider = document.querySelector('.items')
+  let isDown = false
+  let startX
+  let scrollLeft
+
+  slider.addEventListener('mousedown', (event) => {
+    isDown = true
+    slider.classList.add('active')
+    // console.log(event.pageX)  // where mouse click on the page x axis
+    startX = event.pageX - slider.offsetLeft
+    // console.log(startX)  // where mouse click on the page x axis
+    scrollLeft = slider.scrollLeft
+  })
+
+  slider.addEventListener('mouseleave', () => {
+    isDown = false
+    slider.classList.remove('active')
+  })
+
+  slider.addEventListener('mouseup', () => {
+    isDown = false
+    slider.classList.remove('active')
+  })
+
+  slider.addEventListener('mousemove', (event) => {
+    if (!isDown) return //stop the function from running
+    // console.log(isDown)
+    // console.log('Do Work!!')
+    // console.count(isDown)
+    // console.log(startX)
+    event.preventDefault()
+    const xAxis = event.pageX - slider.offsetLeft
+    // console.log({xAxis, startX})
+    const walk = (xAxis - startX) * 3  // every pixel of mousemove is * 3
+    console.log(walk)
+    slider.scrollLeft = walk  // works but is jumpy because it is recalculating every time
+    slider.scrollLeft = scrollLeft - walk
+  })
+
+// inertia scrolling
+// drag and drop
+
 </script>
 
-  </body>
+</body>
 </html>
