@@ -15,6 +15,55 @@
   </div>
 
 <script>
+
+	const speed = document.querySelector('.speed')
+	const bar = document.querySelector('.speed-bar')
+	const video = document.querySelector('.flex')
+
+	// speed.addEventListener('mousemove', function() {
+	// 	// console.log(event)
+	// 	const yAxis = event.pageY - this.offsetTop
+	// 	// console.log(yAxis)
+	// 	const percent = yAxis / this.offsetHeight
+	// 	// console.log(percent)
+	// 	const min = 0.4
+	// 	const max = 4
+	// 	// const height = Math.round(percent * 100) + '%'
+	// 	const height = `${Math.round(percent * 100)}%`
+	// 	// console.log(height)
+	// 	const playbackRate = percent * (max - min) + min
+
+	// 	bar.style.height = height
+	// 	// bar.textContent = playbackRate.toFixed(2) + 'x'
+	// 	bar.textContent = `${playbackRate.toFixed(2)}x`
+	// 	// console.log(playbackRate)
+	// 	video.playbackRate = playbackRate
+	// })
+
+// below is an alternative file structure to the above code
+
+	function handleMove(event) {
+		// console.log(event)
+		const yAxis = event.pageY - this.offsetTop
+		// console.log(yAxis)
+		const percent = yAxis / this.offsetHeight
+		// console.log(percent)
+		const min = 0.4
+		const max = 4
+		// const height = Math.round(percent * 100) + '%'
+		const height = `${Math.round(percent * 100)}%`
+		// console.log(height)
+		const playbackRate = percent * (max - min) + min
+
+		bar.style.height = height
+		// bar.textContent = playbackRate.toFixed(2) + 'x'
+		bar.textContent = `${playbackRate.toFixed(2)}x`
+		// console.log(playbackRate)
+		video.playbackRate = playbackRate	
+	}
+
+	speed.addEventListener('mousemove', handleMove)
+
 </script>
 </body>
 </html>
