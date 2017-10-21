@@ -2,6 +2,7 @@ let countdown
 const timerDisplay = document.querySelector('.display__time-left')
 const endTime = document.querySelector('.display__end-time')
 const buttons = document.querySelectorAll('[data-time]')
+const showStopButton = document.querySelector('.hideButton')
 
 function timer(seconds) {
 	// this doesn't work because setInterval stops/pauses
@@ -18,6 +19,7 @@ function timer(seconds) {
 	// console.log({ now, then })
 	displayTimeLeft(seconds)
 	displayEndTime(then)
+	showStopButton.classList.remove('hideButton')
 
 	countdown = setInterval(() => {
 		const secondsLeft = Math.round((then - Date.now()) / 1000)
@@ -77,3 +79,7 @@ document.customForm.addEventListener('submit', function(event) {
 	timer(mins * 60)
 	this.reset()
 })
+
+function stopClock() {
+	clearInterval(countdown)
+}
